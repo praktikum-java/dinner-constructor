@@ -10,19 +10,15 @@ public class DinnerConstructor {
 
 
     void setDishes(String dishType, String dishName) {
-        System.out.println(dishType + " " + dishName);
         dishesNames = dishes.get(dishType);
         if (dishesNames == null) {
             dishesNames = new ArrayList<>();
         }
         dishesNames.add(dishName);
         dishes.put(dishType, dishesNames);
-        System.out.println(dishes);
-        System.out.println("-------");
-
     }
 
-    void setDefaultDishes() {
+    void setDefaultDishes() { //TODO remove the method before review
         dishesNames = new ArrayList<>();
         dishesNames.add("Яблочный сок");
         dishesNames.add("Томатный сок");
