@@ -31,8 +31,10 @@ public class Main {
                     return;
                 case "4": //TODO remove the command before review
                     addNewDishFromDatasets();
+                    break;
                 case "5"://TODO remove the command before review
                     generateDishComboFromDatasets(setDefaultDishTypes());
+                    break;
                 default:
                     System.out.println("Выберите команду из списка");
             }
@@ -72,7 +74,7 @@ public class Main {
             inputtedItems.add(nextItem);
             nextItem = scanner.nextLine();
         }
-        System.out.println(inputtedItems);
+        System.out.printf("Выбраны категории блюд: %s \n", inputtedItems);
         for (int i = 0; i < numberOfCombos; i++) {
             ArrayList<String> combo = new ArrayList<>();
             for (String type : inputtedItems) {
@@ -87,7 +89,8 @@ public class Main {
         System.out.println("Начинаем конструировать обед...");
         System.out.println("Введите количество наборов, которые нужно сгенерировать:");
         int numberOfCombos = scanner.nextInt();
-        System.out.println(list);
+        scanner.nextLine();
+        System.out.printf("Выбраны категории блюд: %s \n", list);
         for (int i = 0; i < numberOfCombos; i++) {
             ArrayList<String> combo = new ArrayList<>();
             for (String type : list) {
