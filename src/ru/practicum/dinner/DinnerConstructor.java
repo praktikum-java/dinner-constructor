@@ -2,11 +2,13 @@ package ru.practicum.dinner;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
 public class DinnerConstructor {
 
     HashMap<String, ArrayList<String>> dishes = new HashMap<>();
     ArrayList<String> dishesNames;
+    Random random = new Random();
 
     void setDishes(String dishType, String dishName) {
         dishesNames = dishes.get(dishType);
@@ -15,6 +17,17 @@ public class DinnerConstructor {
         }
         dishesNames.add(dishName);
         dishes.put(dishType, dishesNames);
+    }
+
+    void combosConstructor(ArrayList<String> inputtedItems, int numberOfCombos) {
+        for (int i = 0; i < numberOfCombos; i++) {
+            ArrayList<String> combo = new ArrayList<>();
+            for (String type : inputtedItems) {
+                int bound = random.nextInt(dishes.get(type).size());
+                combo.add(dishes.get(type).get(bound));
+            }
+            System.out.printf("Комбо %d \n %s \n", (i + 1), combo);
+        }
     }
 
     void setDefaultDishes() { //TODO remove the method before review

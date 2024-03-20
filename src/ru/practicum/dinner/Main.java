@@ -18,7 +18,7 @@ public class Main {
 
         while (true) {
             printMenu();
-            String command = scanner.nextLine();
+            String command = scanner.nextLine().trim();
 
             switch (command) {
                 case "1":
@@ -47,7 +47,7 @@ public class Main {
         System.out.println("2 - Сгенерировать комбинации блюд");
         System.out.println("3 - Выход");
         System.out.println("4 - Использовать готовые наборы данных (категории и блюда)"); //TODO remove the command before review
-        System.out.println("5 - Использовать готовый набор категорий для формирования комбоВ:)");//TODO remove the command before review
+        System.out.println("5 - Использовать готовый набор категорий для формирования кОмбоВ:)");//TODO remove the command before review
     }
 
     private static void addNewDish() {
@@ -67,22 +67,22 @@ public class Main {
         System.out.println("Введите количество наборов, которые нужно сгенерировать:");
         int numberOfCombos = scanner.nextInt();
         scanner.nextLine();
-        System.out.println("Вводите типы блюда, разделяя символом переноса строки (enter). Для завершения ввода введите пустую строку");
+        System.out.printf("Вводите типы блюда, разделяя символом переноса строки (enter). Для завершения ввода введите " +
+                        "пустую строку.\nВ настоящее время доступны для выбора следующие категории (типы) блюд: %s \n",
+                dinnerConstructor.dishes.keySet());
+
         String nextItem = scanner.nextLine();
         ArrayList<String> inputtedItems = new ArrayList<>();
         while (!nextItem.isEmpty()) {
-            inputtedItems.add(nextItem);
+            if (dinnerConstructor.dishes.containsKey(nextItem)) {
+                inputtedItems.add(nextItem);
+            } else {
+                System.out.println("Данный тип блюд отсутствует во введенном ранее перечне.");
+            }
             nextItem = scanner.nextLine();
         }
-        System.out.printf("Выбраны категории блюд: %s \n", inputtedItems);
-        for (int i = 0; i < numberOfCombos; i++) {
-            ArrayList<String> combo = new ArrayList<>();
-            for (String type : inputtedItems) {
-                int bound = random.nextInt(dinnerConstructor.dishes.get(type).size());
-                combo.add(dinnerConstructor.dishes.get(type).get(bound));
-            }
-            System.out.printf("Комбо %d \n %s \n", (i + 1), combo);
-        }
+        System.out.printf("Выбраны следующие категории блюд: %s \n", inputtedItems);
+        dinnerConstructor.combosConstructor(inputtedItems, numberOfCombos);
     }
 
     private static void generateDishComboFromDatasets(ArrayList<String> list) { //TODO remove the method before review
@@ -91,14 +91,7 @@ public class Main {
         int numberOfCombos = scanner.nextInt();
         scanner.nextLine();
         System.out.printf("Выбраны категории блюд: %s \n", list);
-        for (int i = 0; i < numberOfCombos; i++) {
-            ArrayList<String> combo = new ArrayList<>();
-            for (String type : list) {
-                int bound = random.nextInt(dinnerConstructor.dishes.get(type).size());
-                combo.add(dinnerConstructor.dishes.get(type).get(bound));
-            }
-            System.out.printf("Комбо %d \n %s \n", (i + 1), combo);
-        }
+        dinnerConstructor.combosConstructor(setDefaultDishTypes(), numberOfCombos);
     }
     private static ArrayList<String> setDefaultDishTypes() { //TODO remove the method before review
         ArrayList<String> inputtedDishes = new ArrayList<>();
