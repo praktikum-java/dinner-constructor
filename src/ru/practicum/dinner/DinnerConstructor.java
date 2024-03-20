@@ -8,7 +8,6 @@ public class DinnerConstructor {
     HashMap<String, ArrayList<String>> dishes = new HashMap<>();
     ArrayList<String> dishesNames;
 
-
     void setDishes(String dishType, String dishName) {
         dishesNames = dishes.get(dishType);
         if (dishesNames == null) {

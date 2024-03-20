@@ -97,7 +97,6 @@ public class Main {
             System.out.printf("Комбо %d \n %s \n", (i + 1), combo);
         }
     }
-
     private static ArrayList<String> setDefaultDishTypes() { //TODO remove the method before review
         ArrayList<String> inputtedDishes = new ArrayList<>();
         inputtedDishes.add("Первые блюда");
