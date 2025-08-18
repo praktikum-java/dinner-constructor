@@ -43,7 +43,6 @@ public class Main {
         String dishName = scanner.nextLine();
         dc.addDish(dishType, dishName);
         System.out.println("Добавлено блюдо: " + dishName + " Тип: " + dishType);
-        // добавьте новое блюдо
     }
 
     private static void generateDishCombo() {
@@ -56,8 +55,8 @@ public class Main {
             System.out.println("Нужно ввести число!");
             numberOfCombos = scanner.nextLine();
         }
-        //scanner.nextLine();
         int numberOfCombosint = Integer.parseInt(numberOfCombos);
+
         while (numberOfCombosint <= 0) {
             System.out.println("Число должно быть больше 0!");
             numberOfCombosint = Integer.parseInt(scanner.nextLine());
@@ -73,6 +72,7 @@ public class Main {
                 }
                 break;
             }
+
             if (dc.checkType(nextItem)) {
                 types.add(nextItem);
             } else {
@@ -80,21 +80,11 @@ public class Main {
             }
 
         }
+
         int numberOfList = 0;
         for (ArrayList<String> list : dc.getRandomDinner(numberOfCombosint, types)) {
             System.out.println("Комбо " + (++numberOfList));
             System.out.println(list);
         }
-
-
-//        //реализуйте ввод типов блюд
-//        while (!nextItem.isEmpty()) {
-//            dishes.add(nextItem);
-//        }
-
-        // сгенерируйте комбинации блюд и выведите на экран
-
     }
-
-
 }
