@@ -58,21 +58,27 @@ public class Main {
         }
         //scanner.nextLine();
         int numberOfCombosint = Integer.parseInt(numberOfCombos);
-        if (numberOfCombosint <= 0) {
+        while (numberOfCombosint <= 0) {
             System.out.println("Число должно быть больше 0!");
+            numberOfCombosint = Integer.parseInt(scanner.nextLine());
         }
 
         System.out.println("Вводите типы блюда, разделяя символом переноса строки (enter). Для завершения ввода введите пустую строку");
         while (true) {
             String nextItem = scanner.nextLine().toLowerCase();
             if (nextItem.isEmpty()) {
+                if (types.isEmpty()) {
+                    System.out.println("Не введено ни одной категории блюд!");
+                    return;
+                }
                 break;
             }
             if (dc.checkType(nextItem)) {
                 types.add(nextItem);
             } else {
-                System.out.println("Нет такого типа блюда");
+                System.out.println("Нет такого типа блюда!");
             }
+
         }
         int numberOfList = 0;
         for (ArrayList<String> list : dc.getRandomDinner(numberOfCombosint, types)) {
