@@ -23,27 +23,27 @@ public class DinnerConstructor {
     }
 
     public ArrayList<ArrayList<String>> generateCombos(int comboNumber, ArrayList<String> dishTypes) {
-        ArrayList<String> combos = new ArrayList<>();
+        ArrayList<ArrayList<String>> combos = new ArrayList<>();
         for (int i = 0; i <= comboNumber; i++) {
-            ArrayList<String> combo = generateCombo(dishTypes); //одна комбинация блюд генерируется в отдельном методе
+            ArrayList<String> combo = generateCombo(dishTypes);
             combos.add(combo);
         }
+
         return combos;
     }
 
-
-    //метод для проверки дубликатов блюд
     public boolean checkType(String type) {
-        return dinnersByType.containsKey(type); //если хранилище уже содержит такое блюдо - вернём true
+        return dinnersByType.containsKey(type);
     }
 
     private ArrayList<String> generateCombo(ArrayList<String> dishTypes) {
         ArrayList<String> selectedDishes = new ArrayList<>();
-        for (String dishType: dishTypes) {
+        for (String dishType : dishTypes) {
             ArrayList<String> availableDishes = dinnersByType.get(dishType);
             String selectedDish = getRandomDish(availableDishes);
             selectedDishes.add(selectedDish);
         }
+
         return selectedDishes;
     }
 
