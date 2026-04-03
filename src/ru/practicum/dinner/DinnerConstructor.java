@@ -6,26 +6,25 @@ import java.util.Random;
 
 public class DinnerConstructor {
 
-    HashMap<?, ?> dinnersByType = ??? // хранилище блюд: ключ — тип блюда (например, "Суп"), значение — список названий блюд этого типа
-    Random random = new Random(); //этот вспомогательный класс поможет сделать произвольные сочетания блюд
+    HashMap<String, ArrayList<String>> dinnersByType = new HashMap<>();
+    Random random = new Random();
 
-    //в этом методе мы добавляем компонент в подборку
     public void addNewDish(String dishType, String dishName) {
-        ??? dishesForType; //переменая для списка блюд
-        if (dinnersByType.???(dishType)) { //здесь мы должны проверить, содержит ли наше хранилище такое блюдо
-            dishesForType = ??//если мы уже работали с этим типом - используем существующий список
+        ArrayList<String> dishesForType;
+
+        if (dinnersByType.containsKey(dishType)) {
+            dishesForType = dinnersByType.get(dishType);
         } else {
-            dishesForType = //для нового типа блюд создаём пустой список компонентов.
-            dinnersByType.???(dishType, dishesForType); //запоминаем новый список в хранилище
+            dishesForType = new ArrayList<>();
+            dinnersByType.put(dishType, dishesForType);
         }
 
-        dishesForType.???(dishName); //независимо от того, новый это список или существующий - добавим в него конкретное блюдо
+        dishesForType.add(dishName);
     }
 
-    //метод для генерирования вариантов комбинации блюд
     public ArrayList<ArrayList<String>> generateCombos(int comboNumber, ArrayList<String> dishTypes) {
-        ??? combos = ??? //пустой список для хранения получившихся комбинаций блюд
-        for (???; i <= comboNumber; ???) {
+        ArrayList<String> combos = new ArrayList<>();
+        for (int i = 0; i <= comboNumber; i++) {
             ??? combo = generateCombo(dishTypes); //одна комбинация блюд генерируется в отдельном методе
             combos.add(combo);
         }
@@ -35,11 +34,11 @@ public class DinnerConstructor {
 
     //метод для проверки дубликатов блюд
     public boolean checkType(String type) {
-        return dinnersByType.???(type); //если хранилище уже содержит такое блюдо - вернём true
+        return dinnersByType.containsKey(type); //если хранилище уже содержит такое блюдо - вернём true
     }
 
     //метод для генерирования одной комбинации блюд
-    private ??? ***(??? dishTypes) {
+    private generateCombo(??? dishTypes) {
         ??? selectedDishes = ???;
         for (??? dishType: dishTypes) {
             ??? availableDishes = dinnersByType.???(dishType); //достаём из хранилища варианты блюд по типу
