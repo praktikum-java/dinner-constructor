@@ -25,7 +25,7 @@ public class DinnerConstructor {
     public ArrayList<ArrayList<String>> generateCombos(int comboNumber, ArrayList<String> dishTypes) {
         ArrayList<String> combos = new ArrayList<>();
         for (int i = 0; i <= comboNumber; i++) {
-            ??? combo = generateCombo(dishTypes); //одна комбинация блюд генерируется в отдельном методе
+            ArrayList<String> combo = generateCombo(dishTypes); //одна комбинация блюд генерируется в отдельном методе
             combos.add(combo);
         }
         return combos;
@@ -37,21 +37,19 @@ public class DinnerConstructor {
         return dinnersByType.containsKey(type); //если хранилище уже содержит такое блюдо - вернём true
     }
 
-    //метод для генерирования одной комбинации блюд
-    private generateCombo(??? dishTypes) {
-        ??? selectedDishes = ???;
-        for (??? dishType: dishTypes) {
-            ??? availableDishes = dinnersByType.???(dishType); //достаём из хранилища варианты блюд по типу
-            String selectedDish = ???(availableDishes); //полцчим произвольное блюдо
-            selectedDishes.???(selectedDish); //добавим блюдо в подборку комбинацию
+    private ArrayList<String> generateCombo(ArrayList<String> dishTypes) {
+        ArrayList<String> selectedDishes = new ArrayList<>();
+        for (String dishType: dishTypes) {
+            ArrayList<String> availableDishes = dinnersByType.get(dishType);
+            String selectedDish = getRandomDish(availableDishes);
+            selectedDishes.add(selectedDish);
         }
         return selectedDishes;
     }
 
-    private String getRandomDish(??? availableDishes) {
-        int numberOfDishesForType = availableDishes.size(); //получаем общее количество доступных блюд этого типа
-        int dishIndex = random.nextInt(numberOfDishesForType); //генерируем случайное число от 0 до (кол-во блюд - 1), чтобы выбрать случайное блюдо
-        String selectedDish = availableDishes.???(dishIndex); //выберем произвольное блюдо по индексу
+    private String getRandomDish(ArrayList<String> availableDishes) {
+        int numberOfDishesForType = availableDishes.size();
+        int dishIndex = random.nextInt(numberOfDishesForType);
+        return availableDishes.get(dishIndex);
     }
-
 }
